@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  checked: boolean = true;
+  selectAll: boolean = false;
   displayedColumns: string[] = ['isSelected', 'description'];
   faqs: Array<FrequentlyAskedQuestion> = ELEMENT_DATA;
 
@@ -15,6 +15,22 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  onCheckboxChange(value: boolean, type?: 'SELECT_ALL' | 'OTHER'): void {
+    if (type && type === 'SELECT_ALL') {
+      if (value) {
+        this.faqs.map((faq: FrequentlyAskedQuestion) => faq.isSelected = true);
+      } else {
+        this.faqs.map((faq: FrequentlyAskedQuestion) => faq.isSelected = false);
+      }
+    } else {
+      if (!value) {
+        this.selectAll = false;
+      } else if (this.faqs.filter((faq: FrequentlyAskedQuestion) => faq.isSelected === true).length === this.faqs.length) {
+        this.selectAll = true;
+      }
+    }
   }
 
   addToFrequentlyAskedQuestions(description: string): void {
