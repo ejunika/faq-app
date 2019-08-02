@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   checked: boolean = true;
+  displayedColumns: string[] = ['isSelected', 'description'];
+  dataSource = ELEMENT_DATA;
 
   constructor() { }
 
@@ -16,3 +18,13 @@ export class HomeComponent implements OnInit {
   }
 
 }
+
+export interface FrequentlyAskedQuestion {
+  id: number;
+  description: string;
+  isSelected: boolean;
+}
+
+const ELEMENT_DATA: FrequentlyAskedQuestion[] = [
+  { id: 1, description: 'What is this?', isSelected: false }
+];
